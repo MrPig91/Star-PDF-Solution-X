@@ -1,0 +1,133 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+  <!-- Define your primary colors -->
+  <Color x:Key="PrimaryColor">#2196F3</Color>
+  <Color x:Key="PrimaryDarkColor">#1976D2</Color>
+  <Color x:Key="PrimaryLightColor">#64B5F6</Color>
+
+  <!-- Define your secondary colors -->
+  <Color x:Key="SecondaryColor">#03A9F4</Color>
+  <Color x:Key="SecondaryDarkColor">#050a0d</Color>
+  <Color x:Key="SecondaryLightColor">#4FC3F7</Color>
+
+  <!-- Define your background and text colors -->
+  <Color x:Key="BackgroundColor">#121212</Color>
+  <Color x:Key="ForegroundColor">#FFFFFF</Color>
+  <Color x:Key="SecondaryForegroundColor">#CCCCCC</Color>
+
+  <!-- Define the actual SolidColorBrush resources -->
+  <SolidColorBrush x:Key="PrimaryBrush" Color="#08131b" />
+  <SolidColorBrush x:Key="PrimaryDarkBrush" Color="#040a0d" />
+  <SolidColorBrush x:Key="PrimaryLightBrush" Color="#0b1b27" />
+
+  <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}" />
+  <SolidColorBrush x:Key="SecondaryDarkBrush" Color="{StaticResource SecondaryDarkColor}" />
+  <SolidColorBrush x:Key="SecondaryLightBrush" Color="{StaticResource SecondaryLightColor}" />
+
+  <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+  <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}" />
+  <SolidColorBrush x:Key="SecondaryForegroundBrush" Color="{StaticResource SecondaryForegroundColor}" />
+
+  <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#333333" />
+  <SolidColorBrush x:Key="ButtonDarkBackgroundBrush" Color="#121212" />
+  <SolidColorBrush x:Key="ButtonForegroundBrush" Color="{StaticResource ForegroundColor}" />
+  <SolidColorBrush x:Key="ButtonLighBackgroundBrush" Color="#595959" />
+  <SolidColorBrush x:Key="ButtonBackgroundDisabledBrush" Color="#454545" />
+  <SolidColorBrush x:Key="ButtonForegroundDisabledBrush" Color="#999999" />
+
+  <SolidColorBrush x:Key="BorderDragDropColor" Color="#4c4c4c" />
+  <Color x:Key="DragDropBorderColor">#4c4c4c</Color>
+
+
+  <LinearGradientBrush x:Key="ProgressGradientBrush" StartPoint="0 0" EndPoint="1 0" >
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Offset="0" Color="#364536" />
+      <GradientStop Offset="1"  Color="#709170" />
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+
+  <ControlTheme x:Key="WindowGrid" TargetType="Grid">
+    <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
+  </ControlTheme>
+
+  <ControlTheme x:Key="h1" TargetType="TextBlock">
+    <Setter Property="FontSize" Value="24"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+  </ControlTheme>
+
+  <ControlTheme x:Key="GeneralListBox" TargetType="ListBox">
+    <Setter Property="Background" Value="{StaticResource SecondaryDarkBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+  </ControlTheme>
+
+  <ControlTheme x:Key="ExpanderHeader" TargetType="TextBlock">
+
+  </ControlTheme>
+
+  <ControlTheme x:Key="GeneralExpander" TargetType="Expander">
+    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+    <Setter Property="Background" Value="{StaticResource PrimaryLightBrush}" />
+  </ControlTheme>
+
+  <ControlTheme x:Key="GeneralCheckbox" TargetType="CheckBox">
+    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+    <Setter Property="Margin" Value="5" />
+    <Setter Property="FontSize" Value="12" />
+  </ControlTheme>
+
+  <ControlTheme x:Key="GeneralButton" TargetType="Button">
+    <Setter Property="Background" Value="{StaticResource ButtonDarkBackgroundBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="Margin" Value="1" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border Background="{TemplateBinding Background}" CornerRadius="5" BorderThickness="1" Padding="{TemplateBinding Padding}"
+                  BorderBrush="{StaticResource SecondaryForegroundBrush}" HorizontalAlignment="Stretch">
+            <ContentPresenter x:Name="PART_ContentPresenter"
+                              Content="{TemplateBinding Content}"
+                              HorizontalContentAlignment="Center"
+                              VerticalContentAlignment="Center"
+                              Margin="{TemplateBinding Padding}"/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style Selector="^:pointerover">
+      <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Background" Value="{StaticResource ButtonBackgroundDisabledBrush}" />
+      <Setter Property="Foreground" Value="{StaticResource ButtonForegroundDisabledBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="GeneralTextBox" TargetType="TextBox">
+    <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+  </ControlTheme>
+
+  <ControlTheme x:Key="GeneralTextBlock" TargetType="TextBlock">
+    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+  </ControlTheme>
+
+  <ControlTheme x:Key="BaseToolTip" TargetType="ToolTip">
+    <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ToolTip">
+          <Border Background="{TemplateBinding Background}" CornerRadius="5" BorderThickness="1" Padding="{TemplateBinding Padding}"
+                  BorderBrush="{StaticResource SecondaryForegroundBrush}" HorizontalAlignment="Stretch">
+            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                              TextBlock.TextAlignment="Left"/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>
