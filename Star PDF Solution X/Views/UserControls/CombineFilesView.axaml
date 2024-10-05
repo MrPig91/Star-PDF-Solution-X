@@ -1,0 +1,108 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Star_PDF_Solution_X.CombineFilesView">
+  <Grid Theme="{StaticResource WindowGrid}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <Button Grid.Column="0" Padding="5" Theme="{StaticResource GeneralButton}"
+              ToolTip.Tip="Move Up">
+        <Image />
+      </Button>
+      <Button Grid.Column="1" Padding="5" Theme="{StaticResource GeneralButton}"
+        ToolTip.Tip="Move Down">
+        <Image />
+      </Button>
+      <Button Grid.Column="2" Padding="5" Theme="{StaticResource GeneralButton}"
+        ToolTip.Tip="Enable / Disable Natural Sorting">
+        <Image />
+      </Button>
+      <Button Grid.Column="3" Padding="5" Theme="{StaticResource GeneralButton}"
+          ToolTip.Tip="Remove Selected File">
+        <Image />
+      </Button>
+      <Button Grid.Column="4" Padding="5" Theme="{StaticResource GeneralButton}"
+          ToolTip.Tip="Remove All Files">
+        <Image />
+      </Button>
+      <Button Content="Select Files" Grid.Column="5" Theme="{StaticResource GeneralButton}" Margin="2.5" Padding="5" FontSize="17"></Button>
+    </Grid>
+
+    <TextBlock Grid.Row="1" Text="files to combine" Foreground="{StaticResource SecondaryForegroundBrush}" FontSize="20"
+               HorizontalAlignment="Center" VerticalAlignment="Center"
+               Opacity=".15" ZIndex="1"/>
+    <ListBox Grid.Row="1" Theme="{StaticResource GeneralListBox}" Margin="5">
+    </ListBox>
+
+    <Expander Grid.Row="2" Theme="{StaticResource GeneralExpander}" IsExpanded="False" Margin="0 0 0 10">
+      <Expander.Header>
+        <TextBlock Text="Options" FontSize="15" FontWeight="SemiBold" />
+      </Expander.Header>
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="5"/>
+          <RowDefinition />
+          <RowDefinition Height="auto" />
+          <RowDefinition />
+          <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="5"/>
+          <ColumnDefinition />
+          <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+
+        <WrapPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+          <CheckBox Content="Remove Comments"
+              
+              Theme="{StaticResource GeneralCheckbox}" />
+          <CheckBox Content="Remove Bookmarks" Margin="10 5 5 5"
+              
+              Theme="{StaticResource GeneralCheckbox}" />
+        </WrapPanel>
+        
+        <Separator Grid.ColumnSpan="3" Grid.Row="2" Margin="5" FontSize="12" />
+        
+        <WrapPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+          <CheckBox Content="Open Combined File"
+                
+                Theme="{StaticResource GeneralCheckbox}" />
+          <CheckBox Content="Delete Source Files" Margin="10 5 5 5"
+                
+                Theme="{StaticResource GeneralCheckbox}" />
+        </WrapPanel>
+      </Grid>
+    </Expander>
+
+    <Button Grid.Row="3" Theme="{StaticResource GeneralButton}" Margin="5 0 5 5" Padding="5">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <Image Height="25" Margin="0 0 10 0"/>
+        <TextBlock Text="Combine" VerticalAlignment="Center" FontSize="17"/>
+      </StackPanel>
+    </Button>
+
+    <StackPanel Orientation="Horizontal" Grid.Row="4">
+      <Label Content="Output File:" Foreground="{StaticResource ForegroundBrush}" FontWeight="Bold"/>
+      <TextBlock Theme="{StaticResource GeneralTextBlock}" Text="Test" VerticalAlignment="Center"/>
+    </StackPanel>
+  </Grid>
+</UserControl>
