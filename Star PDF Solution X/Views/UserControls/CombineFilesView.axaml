@@ -109,7 +109,9 @@
       </Grid>
     </Expander>
 
-    <Button Grid.Row="3" Theme="{StaticResource GeneralButton}" Margin="5 0 5 5" Padding="5">
+    <Button Grid.Row="3" Theme="{StaticResource GeneralButton}" 
+            Margin="5 0 5 5" Padding="5"
+            Command="{Binding CombineFilesCommand}">
       <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
         <Image Height="25" Margin="0 0 10 0"/>
         <TextBlock Text="Combine" VerticalAlignment="Center" FontSize="17"/>
