@@ -82,7 +82,7 @@
     <Setter Property="Background" Value="{StaticResource ButtonDarkBackgroundBrush}" />
     <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
     <Setter Property="FontWeight" Value="SemiBold" />
-    <Setter Property="Margin" Value="1" />
+    <Setter Property="Margin" Value="2.5" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type Button}">

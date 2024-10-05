@@ -26,7 +26,9 @@
       <RowDefinition Height="auto" />
     </Grid.RowDefinitions>
     
-    <uc:CombineFilesView />
+    <uc:CombineFilesView Margin="5"/>
+    <uc:SplitFileView Grid.Column="1" Margin="5"/>
   </Grid>
 
+  
 </Window>
