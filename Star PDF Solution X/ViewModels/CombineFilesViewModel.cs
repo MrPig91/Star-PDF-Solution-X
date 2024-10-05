@@ -10,6 +10,11 @@ using CommunityToolkit.Mvvm.Input;
 using StarPDFSolutionLibrary.Services.Editors;
 using System.Windows.Input;
 using System.IO;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
+using Avalonia;
+using ReactiveUI;
+using Avalonia.Threading;
 
 namespace Star_PDF_Solution_X.ViewModels
 {
@@ -45,12 +50,20 @@ namespace Star_PDF_Solution_X.ViewModels
 
         public CombineFilesOptionsViewModel Options { get; } = new();
 
-        private void SelectFiles()
+        private async void SelectFiles()
         {
-            //SourceFiles.Clear();
-            //var files = FileSelectorUtility.SelectMultipleFiles(FileSelectorUtility.FilterPDF);
-            //foreach (var file in files)
-            //    SourceFiles.Add(new(file));
+            SourceFiles.Clear();
+            if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
+                desktop.MainWindow?.StorageProvider is not { } provider)
+                throw new NullReferenceException("Missing StorageProvider instance.");
+            var files = await provider.OpenFilePickerAsync(new FilePickerOpenOptions()
+            {
+                Title = "Open Text File",
+                AllowMultiple = true
+            });
+
+            foreach (var file in files)
+                SourceFiles.Add(new(file.Path.LocalPath));
         }
         private ICommand? _selectFilesCommand;
         public ICommand SelectFilesCommand
@@ -232,5 +245,7 @@ namespace Star_PDF_Solution_X.ViewModels
         {
             _pdfEditorService = pdfEditorService;
         }
+
+        public CombineFilesViewModel() { }
     }
 }

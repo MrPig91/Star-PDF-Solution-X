@@ -1,9 +1,14 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:Star_PDF_Solution_X.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:CombineFilesViewModel"
              x:Class="Star_PDF_Solution_X.CombineFilesView">
+  <Design.DataContext>
+    <vm:CombineFilesViewModel/>
+  </Design.DataContext>
   <Grid Theme="{StaticResource WindowGrid}">
     <Grid.RowDefinitions>
       <RowDefinition Height="auto" />
@@ -44,15 +49,24 @@
           ToolTip.Tip="Remove All Files">
         <Image Source="/Assets/clear.png" Height="25"/>
       </Button>
-      <Button Content="Select Files" Grid.Column="5" 
-              Theme="{StaticResource GeneralButton}" Margin="2.5" Padding="5" 
-              FontSize="17"></Button>
+      <Button
+        Command="{Binding SelectFilesCommand}"
+        Content="Select Files" Grid.Column="5"
+        Theme="{StaticResource GeneralButton}"
+        FontSize="17">
+      </Button>
     </Grid>
 
     <TextBlock Grid.Row="1" Text="files to combine" Foreground="{StaticResource SecondaryForegroundBrush}" FontSize="20"
                HorizontalAlignment="Center" VerticalAlignment="Center"
                Opacity=".15" ZIndex="1"/>
-    <ListBox Grid.Row="1" Theme="{StaticResource GeneralListBox}" Margin="5">
+    <ListBox Grid.Row="1" Margin="5"
+             ItemsSource="{Binding Path=SourceFiles}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding}" />
+        </DataTemplate>
+      </ListBox.ItemTemplate>
     </ListBox>
 
     <Expander Grid.Row="2" Theme="{StaticResource GeneralExpander}" IsExpanded="False" Margin="0 0 0 10">
