@@ -1,0 +1,99 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Star_PDF_Solution_X.SplitFileView">
+
+  <Grid Theme="{StaticResource WindowGrid}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="auto" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <TextBlock Grid.Row="0" Text="files to split" 
+                 Foreground="{StaticResource SecondaryForegroundBrush}" FontSize="20" ZIndex="1" 
+                 HorizontalAlignment="Center" VerticalAlignment="Center" Opacity=".15" Grid.RowSpan="3"/>
+      <ListBox Theme="{StaticResource GeneralListBox}" Grid.RowSpan="3" Margin="5" MaxHeight="100"
+               />
+      <Button Content="Select Files" Theme="{StaticResource GeneralButton}" Grid.Column="1" Margin="0 5 5 2.5" Padding="10 5" FontSize="17"
+              />
+      <Button Theme="{StaticResource GeneralButton}" Margin="0 2.5 5 5"
+              Grid.Column="1" Grid.Row="1" Padding="5">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+          <Image Height="25" Margin="5 0 5 0"/>
+        </StackPanel>
+      </Button>
+    </Grid>
+
+    <TextBlock Grid.Row="2" Text="split files" Foreground="{StaticResource SecondaryForegroundBrush}" 
+               FontSize="20" ZIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity=".15"
+               />
+    <ListBox Theme="{StaticResource GeneralListBox}" Grid.Row="2" Margin="5 2.5 5 5"
+             />
+
+    <Expander Grid.Row="3" Theme="{StaticResource GeneralExpander}" IsExpanded="False" Margin="0 0 0 10">
+      <Expander.Header>
+        <TextBlock Text="Options" FontSize="15" FontWeight="SemiBold" />
+      </Expander.Header>
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="5"/>
+          <RowDefinition />
+          <RowDefinition Height="auto" />
+          <RowDefinition />
+          <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="5"/>
+          <ColumnDefinition />
+          <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+
+        <WrapPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+          <CheckBox Content="Remove Comments"
+              
+              Grid.Column="0" Theme="{StaticResource GeneralCheckbox}" />
+          <CheckBox Content="Remove Bookmarks" Margin="10 5 5 5"
+              
+              Grid.Column="0" Theme="{StaticResource GeneralCheckbox}" />
+        </WrapPanel>
+
+        <Separator Grid.ColumnSpan="3" Grid.Row="2" Margin="5" FontSize="12" />
+
+        <WrapPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+          <CheckBox Content="Open Destination Folder" Grid.Row="3"
+                
+                Grid.Column="0" Theme="{StaticResource GeneralCheckbox}" />
+          <CheckBox Content="Delete Source File" Grid.Row="3" Margin="10 5 5 5"
+                
+                Grid.Column="1" Theme="{StaticResource GeneralCheckbox}" />
+        </WrapPanel>
+      </Grid>
+    </Expander>
+
+    <Button Padding="5" Margin="5 0 5 0" Grid.Row="4" Theme="{StaticResource GeneralButton}"
+         >
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <Image Height="25" Margin="0 0 10 0"/>
+        <TextBlock Text="Split" VerticalAlignment="Center" FontSize="17"/>
+      </StackPanel>
+    </Button>
+  </Grid>
+</UserControl>

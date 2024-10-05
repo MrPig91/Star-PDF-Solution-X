@@ -3,6 +3,7 @@
         xmlns:vm="using:Star_PDF_Solution_X.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="using:Star_PDF_Solution_X"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Star_PDF_Solution_X.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -16,19 +17,16 @@
     </Design.DataContext>
 
   <Grid Theme="{StaticResource WindowGrid}">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
-      <RowDefinition Height="*" />
+      <RowDefinition />
       <RowDefinition Height="auto" />
-      <RowDefinition Height="25" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="*" />
     </Grid.RowDefinitions>
-    <TextBox Text="{Binding Greeting}" Grid.Row="1"/>
-
-    <Button Theme="{StaticResource GeneralButton}"
-            Grid.Row="3" Height="25">
-      <TextBlock Text="Test" />
-    </Button>
+    
+    <uc:CombineFilesView />
   </Grid>
 
 </Window>
