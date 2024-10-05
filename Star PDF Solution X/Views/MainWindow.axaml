@@ -25,9 +25,14 @@
       <RowDefinition />
       <RowDefinition Height="auto" />
     </Grid.RowDefinitions>
-    
-    <uc:CombineFilesView Margin="5"/>
-    <uc:SplitFileView Grid.Column="1" Margin="5"/>
+
+    <Border BorderBrush="WhiteSmoke" BorderThickness="1" CornerRadius="5" Margin="5" Padding="2.5">
+      <uc:CombineFilesView Margin="2.5"/>
+    </Border>
+    <Border BorderBrush="WhiteSmoke" BorderThickness="1" CornerRadius="5" Padding="2.5"
+            Grid.Column="1" Margin="5">
+      <uc:SplitFileView Grid.Column="1" Margin="2.5"/>
+    </Border>
   </Grid>
 
   
