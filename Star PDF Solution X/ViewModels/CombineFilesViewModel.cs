@@ -241,6 +241,27 @@ namespace Star_PDF_Solution_X.ViewModels
             }
         }
 
+        private void OpenFile()
+        {
+            try
+            {
+                if (File.Exists(OutputFile?.FilePath) == false)
+                    return;
+                Process.Start(new ProcessStartInfo(OutputFile.FilePath) { UseShellExecute = true });
+            }
+            catch (Exception ex) { }
+        }
+        private ICommand _openFileCommand;
+        public ICommand OpenFileCommand
+        {
+            get
+            {
+                if (_openFileCommand is null)
+                    _openFileCommand = new RelayCommand(OpenFile);
+                return _openFileCommand;
+            }
+        }
+
         public CombineFilesViewModel(IPDFEditorService pdfEditorService)
         {
             _pdfEditorService = pdfEditorService;

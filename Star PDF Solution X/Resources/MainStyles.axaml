@@ -53,11 +53,6 @@
     <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
   </ControlTheme>
 
-  <ControlTheme x:Key="h1" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="24"/>
-    <Setter Property="FontWeight" Value="Bold"/>
-  </ControlTheme>
-
   <ControlTheme x:Key="GeneralListBox" TargetType="ListBox">
     <Setter Property="Background" Value="{StaticResource SecondaryDarkBrush}" />
     <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
@@ -70,12 +65,6 @@
   <ControlTheme x:Key="GeneralExpander" TargetType="Expander">
     <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
     <Setter Property="Background" Value="{StaticResource PrimaryLightBrush}" />
-  </ControlTheme>
-
-  <ControlTheme x:Key="GeneralCheckbox" TargetType="CheckBox">
-    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
-    <Setter Property="Margin" Value="5" />
-    <Setter Property="FontSize" Value="12" />
   </ControlTheme>
 
   <ControlTheme x:Key="GeneralButton" TargetType="Button">

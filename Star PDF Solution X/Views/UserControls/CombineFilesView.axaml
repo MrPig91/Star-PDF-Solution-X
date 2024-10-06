@@ -30,11 +30,11 @@
       </Grid.ColumnDefinitions>
 
       <Button Grid.Column="0" Padding="5" Theme="{StaticResource GeneralButton}"
-              ToolTip.Tip="Move Up">
+              ToolTip.Tip="Move Up" Command="{Binding MoveUpCommand}">
         <Image Source="/Assets/up.png" Height="25"/>
       </Button>
       <Button Grid.Column="1" Padding="5" Theme="{StaticResource GeneralButton}"
-        ToolTip.Tip="Move Down">
+        ToolTip.Tip="Move Down" Command="{Binding MoveDownCommand}">
         <Image Source="/Assets/down.png" Height="25"/>
       </Button>
       <Button Grid.Column="2" Padding="5" Theme="{StaticResource GeneralButton}"
@@ -42,10 +42,11 @@
         <Image Source="/Assets/sort.png" Height="25"/>
       </Button>
       <Button Grid.Column="3" Padding="5" Theme="{StaticResource GeneralButton}"
-          ToolTip.Tip="Remove Selected File">
+          ToolTip.Tip="Remove Selected File" Command="{Binding RemoveCommand}">
         <Image Source="/Assets/remove.png" Height="25"/>
       </Button>
       <Button Grid.Column="4" Padding="5" Theme="{StaticResource GeneralButton}"
+          Command="{Binding ClearCommand}"
           ToolTip.Tip="Remove All Files">
         <Image Source="/Assets/clear.png" Height="25"/>
       </Button>
@@ -61,7 +62,8 @@
                HorizontalAlignment="Center" VerticalAlignment="Center"
                Opacity=".15" ZIndex="1"/>
     <ListBox Grid.Row="1" Margin="5"
-             ItemsSource="{Binding Path=SourceFiles}">
+             ItemsSource="{Binding Path=SourceFiles}"
+             SelectedItem="{Binding SelectedSourceFile}">
       <ListBox.ItemTemplate>
         <DataTemplate>
           <TextBlock Text="{Binding}" />
@@ -88,23 +90,18 @@
         </Grid.ColumnDefinitions>
 
         <WrapPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-          <CheckBox Content="Remove Comments"
-              
-              Theme="{StaticResource GeneralCheckbox}" />
+          <CheckBox Content="Remove Comments" IsChecked="{Binding Options.RemoveComments}" />
           <CheckBox Content="Remove Bookmarks" Margin="10 5 5 5"
-              
-              Theme="{StaticResource GeneralCheckbox}" />
+                    IsChecked="{Binding Options.RemoveBookmarks}" />
         </WrapPanel>
         
         <Separator Grid.ColumnSpan="3" Grid.Row="2" Margin="5" FontSize="12" />
         
         <WrapPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
-          <CheckBox Content="Open Combined File"
-                
-                Theme="{StaticResource GeneralCheckbox}" />
-          <CheckBox Content="Delete Source Files" Margin="10 5 5 5"
-                
-                Theme="{StaticResource GeneralCheckbox}" />
+          <CheckBox Content="Open Combined File" 
+                    IsChecked="{Binding Options.OpenFile}"/>
+          <CheckBox Content="Delete Source Files" Margin="10 5 5 5" 
+                    IsChecked="{Binding Options.DeleteSourceFiles}"/>
         </WrapPanel>
       </Grid>
     </Expander>
@@ -120,7 +117,7 @@
 
     <StackPanel Orientation="Horizontal" Grid.Row="4">
       <Label Content="Output File:" Foreground="{StaticResource ForegroundBrush}" FontWeight="Bold"/>
-      <TextBlock Theme="{StaticResource GeneralTextBlock}" Text="Test" VerticalAlignment="Center"/>
+      <HyperlinkButton Content="{Binding OutputFile.FilePath}" Command="{Binding OpenFileCommand}" />
     </StackPanel>
   </Grid>
 </UserControl>
