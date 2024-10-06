@@ -58,10 +58,12 @@
       </Button>
     </Grid>
 
-    <TextBlock Grid.Row="1" Text="files to combine" Foreground="{StaticResource SecondaryForegroundBrush}" FontSize="20"
+    <TextBlock Grid.Row="1" Text="files to combine" 
+               Foreground="{StaticResource SecondaryForegroundBrush}" FontSize="20"
                HorizontalAlignment="Center" VerticalAlignment="Center"
-               Opacity=".15" ZIndex="1"/>
-    <ListBox Grid.Row="1" Margin="5"
+               Opacity=".15" ZIndex="1" IsVisible="{Binding !SourceFiles.Count}"
+               />
+    <ListBox Grid.Row="1" Margin="5" 
              ItemsSource="{Binding Path=SourceFiles}"
              SelectedItem="{Binding SelectedSourceFile}">
       <ListBox.ItemTemplate>

@@ -182,6 +182,7 @@ namespace Star_PDF_Solution_X.ViewModels
         {
             try
             {
+                
                 //if (IsNaturalSortEnabled)
                 //    SourceFilesView.SortDescriptions.Remove(_naturalSortDescription);
                 //else
