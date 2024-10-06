@@ -3,6 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:Star_PDF_Solution_X.ViewModels"
+             x:DataType="vm:SplitFileViewModel"
              x:Class="Star_PDF_Solution_X.SplitFileView">
 
   <Grid Theme="{StaticResource WindowGrid}">
@@ -29,7 +31,8 @@
 
       <TextBlock Grid.Row="0" Text="files to split" 
                  Foreground="{StaticResource SecondaryForegroundBrush}" FontSize="20" ZIndex="1" 
-                 HorizontalAlignment="Center" VerticalAlignment="Center" Opacity=".15" Grid.RowSpan="3"/>
+                 HorizontalAlignment="Center" VerticalAlignment="Center" Opacity=".15" Grid.RowSpan="3"
+                 IsVisible="{Binding !SourceFilePaths.Count}"/>
       <ListBox Theme="{StaticResource GeneralListBox}" Grid.RowSpan="3" Margin="5" MaxHeight="100"
                />
       <Button Content="Select Files" Theme="{StaticResource GeneralButton}" Grid.Column="1" Margin="0 5 5 2.5" Padding="10 5" FontSize="17"
@@ -44,6 +47,7 @@
 
     <TextBlock Grid.Row="2" Text="split files" Foreground="{StaticResource SecondaryForegroundBrush}" 
                FontSize="20" ZIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity=".15"
+               IsVisible="{Binding !SourceFilePaths.Count}"
                />
     <ListBox Theme="{StaticResource GeneralListBox}" Grid.Row="2" Margin="5 2.5 5 5"
              />
