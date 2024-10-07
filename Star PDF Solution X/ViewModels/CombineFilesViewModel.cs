@@ -59,7 +59,8 @@ namespace Star_PDF_Solution_X.ViewModels
             var files = await provider.OpenFilePickerAsync(new FilePickerOpenOptions()
             {
                 Title = "Open Text File",
-                AllowMultiple = true
+                AllowMultiple = true,
+                FileTypeFilter = new[] { FilePickerFileTypes.Pdf }
             });
 
             foreach (var file in files)

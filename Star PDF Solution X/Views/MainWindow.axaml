@@ -31,7 +31,7 @@
     </Border>
     <Border BorderBrush="WhiteSmoke" BorderThickness="1" CornerRadius="5" Padding="2.5"
             Grid.Column="1" Margin="5">
-      <uc:SplitFileView Grid.Column="1" Margin="2.5"/>
+      <uc:SplitFileView Grid.Column="1" Margin="2.5" DataContext="{Binding Path=SplitFileVM}"/>
     </Border>
   </Grid>
 

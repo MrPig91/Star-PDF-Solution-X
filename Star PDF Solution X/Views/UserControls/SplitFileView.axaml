@@ -6,7 +6,9 @@
              xmlns:vm="using:Star_PDF_Solution_X.ViewModels"
              x:DataType="vm:SplitFileViewModel"
              x:Class="Star_PDF_Solution_X.SplitFileView">
-
+  <Design.DataContext>
+    <vm:SplitFileViewModel />
+  </Design.DataContext>
   <Grid Theme="{StaticResource WindowGrid}">
     <Grid.RowDefinitions>
       <RowDefinition Height="auto" />
@@ -33,12 +35,19 @@
                  Foreground="{StaticResource SecondaryForegroundBrush}" FontSize="20" ZIndex="1" 
                  HorizontalAlignment="Center" VerticalAlignment="Center" Opacity=".15" Grid.RowSpan="3"
                  IsVisible="{Binding !SourceFilePaths.Count}"/>
-      <ListBox Theme="{StaticResource GeneralListBox}" Grid.RowSpan="3" Margin="5" MaxHeight="100"
-               />
+      <ListBox Grid.RowSpan="3" Margin="5" MaxHeight="100"
+               ItemsSource="{Binding SourceFilePaths}">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding}" />
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
       <Button Content="Select Files" Theme="{StaticResource GeneralButton}" Grid.Column="1" Margin="0 5 5 2.5" Padding="10 5" FontSize="17"
-              />
+              Command="{Binding SelectFilesCommand}"/>
       <Button Theme="{StaticResource GeneralButton}" Margin="0 2.5 5 5"
-              Grid.Column="1" Grid.Row="1" Padding="5">
+              Grid.Column="1" Grid.Row="1" Padding="5"
+              Command="{Binding ClearCommand}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
           <Image Source="/Assets/clear.png" Height="25" Margin="5 0 5 0"/>
         </StackPanel>
@@ -47,10 +56,16 @@
 
     <TextBlock Grid.Row="2" Text="split files" Foreground="{StaticResource SecondaryForegroundBrush}" 
                FontSize="20" ZIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity=".15"
-               IsVisible="{Binding !SourceFilePaths.Count}"
+               IsVisible="{Binding !OutputFiles.Count}"
                />
-    <ListBox Theme="{StaticResource GeneralListBox}" Grid.Row="2" Margin="5 2.5 5 5"
-             />
+    <ListBox Grid.Row="2" Margin="5 2.5 5 5"
+             ItemsSource="{Binding OutputFiles}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding}" />
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
 
     <Expander Header="Options"
       Grid.Row="3" IsExpanded="False" Margin="5 0 5 5"
@@ -71,22 +86,22 @@
 
         <WrapPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
           <CheckBox Content="Remove Comments"
-              
-              Grid.Column="0" Theme="{StaticResource GeneralCheckbox}" />
+              IsChecked="{Binding Options.RemoveComments}"
+              Grid.Column="0" />
           <CheckBox Content="Remove Bookmarks" Margin="10 5 5 5"
-              
-              Grid.Column="0" Theme="{StaticResource GeneralCheckbox}" />
+              IsChecked="{Binding Options.RemoveBookmarks}"
+              Grid.Column="0"/>
         </WrapPanel>
 
         <Separator Grid.ColumnSpan="3" Grid.Row="2" Margin="5" FontSize="12" />
 
         <WrapPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
           <CheckBox Content="Open Destination Folder" Grid.Row="3"
-                
-                Grid.Column="0" Theme="{StaticResource GeneralCheckbox}" />
+                IsChecked="{Binding Options.OpenDestinationDirectory}"
+                Grid.Column="0"/>
           <CheckBox Content="Delete Source File" Grid.Row="3" Margin="10 5 5 5"
-                
-                Grid.Column="1" Theme="{StaticResource GeneralCheckbox}" />
+                IsChecked="{Binding Options.DeleteSourceFile}"
+                Grid.Column="1" />
         </WrapPanel>
       </Grid>
     </Expander>

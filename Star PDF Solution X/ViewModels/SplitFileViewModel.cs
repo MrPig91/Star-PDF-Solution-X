@@ -10,6 +10,9 @@ using StarPDFSolutionLibrary.Models;
 using StarPDFSolutionLibrary.Services.Editors;
 using System.Windows.Input;
 using System.IO;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
+using Avalonia;
 
 namespace Star_PDF_Solution_X.ViewModels
 {
@@ -55,12 +58,22 @@ namespace Star_PDF_Solution_X.ViewModels
             }
         }
 
-        private void SelectFiles()
+        private async void SelectFiles()
         {
-            //SourceFilePaths.Clear();
-            //var files = FileSelectorUtility.SelectMultipleFiles(FileSelectorUtility.FilterPDF);
-            //foreach (var file in files)
-            //    SourceFilePaths.Add(file);
+            SourceFilePaths.Clear();
+            if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
+                desktop.MainWindow?.StorageProvider is not { } provider)
+                throw new NullReferenceException("Missing StorageProvider instance.");
+
+            var files = await provider.OpenFilePickerAsync(new FilePickerOpenOptions()
+            {
+                Title = "Open Text File",
+                AllowMultiple = true,
+                FileTypeFilter = new[] { FilePickerFileTypes.Pdf }
+            });
+
+            foreach (var file in files)
+                SourceFilePaths.Add(new(file.Path.LocalPath));
         }
         private ICommand? _selectFilesCommand;
         public ICommand SelectFilesCommand
@@ -141,6 +154,8 @@ namespace Star_PDF_Solution_X.ViewModels
             _pdfEditorService = pdfEditorService;
             _progressUpdater.ProgressChanged += _progressUpdater_ProgressChanged;
         }
+
+        public SplitFileViewModel() { }
 
         private void _progressUpdater_ProgressChanged(object? sender, Tuple<StarPDFDocument, double> e)
         {
