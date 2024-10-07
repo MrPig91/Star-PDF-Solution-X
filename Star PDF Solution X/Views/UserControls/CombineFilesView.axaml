@@ -76,7 +76,7 @@
       </ListBox.ItemTemplate>
     </ListBox>
 
-    <Expander Grid.Row="2" IsExpanded="True" Margin="5 0 5 5"
+    <Expander Grid.Row="2" IsExpanded="False" Margin="5 0 5 5"
               Header="Options"
               HorizontalAlignment="Stretch">
       <Grid>
