@@ -9,7 +9,7 @@ using StarPDFSolutionLibrary.Models;
 
 namespace Star_PDF_Solution_X.ViewModels
 {
-    public class StarPDFDocumentViewModel : ViewModelBase
+    public class StarPDFDocumentViewModel : ViewModelBase, IComparable<StarPDFDocumentViewModel>
     {
         public StarPDFDocument? SourceModel { get; private set; }
         private string _fileName;
@@ -48,6 +48,11 @@ namespace Star_PDF_Solution_X.ViewModels
         public override string ToString()
         {
             return FilePath;
+        }
+
+        public int CompareTo(StarPDFDocumentViewModel? other)
+        {
+            return string.Compare(NaturalSortFileName, other?.NaturalSortFileName);
         }
     }
 }

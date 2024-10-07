@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using StarPDFSolutionLibrary.Services.Editors;
 using System.Windows.Input;
 using System.IO;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Platform.Storage;
-using Avalonia;
-using ReactiveUI;
-using Avalonia.Threading;
 using Star_PDF_Solution_X.Utilities;
+using Star_PDF_Solution_X.Extensions;
 
 namespace Star_PDF_Solution_X.ViewModels
 {
@@ -24,7 +16,7 @@ namespace Star_PDF_Solution_X.ViewModels
         private IPDFEditorService _pdfEditorService;
         private Progress<double> _progressUpdater = new();
 
-        //public bool IsNaturalSortEnabled;
+        public bool IsNaturalSortEnabled;
         public ObservableCollection<StarPDFDocumentViewModel> SourceFiles { get; } = new();
         private StarPDFDocumentViewModel _selectedSourceFile;
         public StarPDFDocumentViewModel SelectedSourceFile
@@ -126,7 +118,6 @@ namespace Star_PDF_Solution_X.ViewModels
                 if (SelectedSourceFile is null)
                     return;
 
-                DisableNaturalSort();
                 var oldIndex = SourceFiles.IndexOf(SelectedSourceFile);
                 var newIndex = oldIndex - 1;
                 if (oldIndex == 0)
@@ -153,7 +144,6 @@ namespace Star_PDF_Solution_X.ViewModels
             {
                 if (SelectedSourceFile is null)
                     return;
-                DisableNaturalSort();
                 var oldIndex = SourceFiles.IndexOf(SelectedSourceFile);
                 var newIndex = oldIndex + 1;
                 if (oldIndex == SourceFiles.Count - 1)
@@ -173,27 +163,11 @@ namespace Star_PDF_Solution_X.ViewModels
                 return _moveDownCommand;
             }
         }
-        private void DisableNaturalSort()
-        {
-            try
-            {
-                //if (IsNaturalSortEnabled)
-                //    SourceFilesView.SortDescriptions.Remove(_naturalSortDescription);
-                //OnPropertyChanged(nameof(IsNaturalSortEnabled));
-            }
-            catch (Exception ex) {  }
-        }
         private void NaturalSort()
         {
             try
             {
-                
-                //if (IsNaturalSortEnabled)
-                //    SourceFilesView.SortDescriptions.Remove(_naturalSortDescription);
-                //else
-                //    SourceFilesView.SortDescriptions.Add(_naturalSortDescription);
-
-                //OnPropertyChanged(nameof(IsNaturalSortEnabled));
+                SourceFiles.Sort();
             }
             catch (Exception ex) {  }
         }
