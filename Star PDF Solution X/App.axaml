@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Star_PDF_Solution_X.App"
              xmlns:local="using:Star_PDF_Solution_X"
-             RequestedThemeVariant="Default">
+             RequestedThemeVariant="Dark">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
   <Application.Resources>
@@ -19,5 +19,6 @@
   
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude  Source="/Resources/BaseStyles.axaml" />
     </Application.Styles>
 </Application>

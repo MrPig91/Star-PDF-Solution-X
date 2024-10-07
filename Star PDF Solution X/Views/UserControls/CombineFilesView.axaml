@@ -18,6 +18,9 @@
       <RowDefinition Height="auto" />
       <RowDefinition Height="auto" />
     </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
 
     <Grid>
       <Grid.ColumnDefinitions>
@@ -73,10 +76,8 @@
       </ListBox.ItemTemplate>
     </ListBox>
 
-    <Expander Grid.Row="2" Theme="{StaticResource GeneralExpander}" IsExpanded="False" Margin="0 0 0 10">
-      <Expander.Header>
-        <TextBlock Text="Options" FontSize="15" FontWeight="SemiBold" />
-      </Expander.Header>
+    <Expander Grid.Row="2" IsExpanded="False" Margin="5 0 5 5"
+              Header="Options" HorizontalAlignment="Stretch">
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="5"/>
@@ -100,10 +101,10 @@
         <Separator Grid.ColumnSpan="3" Grid.Row="2" Margin="5" FontSize="12" />
         
         <WrapPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
-          <CheckBox Content="Open Combined File" 
+          <CheckBox Content="Open Combined File"
                     IsChecked="{Binding Options.OpenFile}"/>
-          <CheckBox Content="Delete Source Files" Margin="10 5 5 5" 
-                    IsChecked="{Binding Options.DeleteSourceFiles}"/>
+          <CheckBox Content="Delete Source Files" Margin="10 5 5 5"
+                    IsChecked="{Binding Options.DeleteSourceFiles}" />
         </WrapPanel>
       </Grid>
     </Expander>

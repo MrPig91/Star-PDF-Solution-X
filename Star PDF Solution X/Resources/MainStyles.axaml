@@ -53,19 +53,19 @@
     <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
   </ControlTheme>
 
-  <ControlTheme x:Key="GeneralListBox" TargetType="ListBox">
+  <!--<ControlTheme x:Key="GeneralListBox" TargetType="ListBox">
     <Setter Property="Background" Value="{StaticResource SecondaryDarkBrush}" />
     <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
-  </ControlTheme>
+  </ControlTheme>-->
 
   <ControlTheme x:Key="ExpanderHeader" TargetType="TextBlock">
 
   </ControlTheme>
 
-  <ControlTheme x:Key="GeneralExpander" TargetType="Expander">
+  <!--<ControlTheme x:Key="GeneralExpander" TargetType="Expander">
     <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
     <Setter Property="Background" Value="{StaticResource PrimaryLightBrush}" />
-  </ControlTheme>
+  </ControlTheme>-->
 
   <ControlTheme x:Key="GeneralButton" TargetType="Button">
     <Setter Property="Background" Value="{StaticResource ButtonDarkBackgroundBrush}" />
