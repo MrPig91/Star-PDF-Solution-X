@@ -13,6 +13,7 @@ using System.IO;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using Avalonia;
+using Star_PDF_Solution_X.Utilities;
 
 namespace Star_PDF_Solution_X.ViewModels
 {
@@ -61,16 +62,10 @@ namespace Star_PDF_Solution_X.ViewModels
         private async void SelectFiles()
         {
             SourceFilePaths.Clear();
-            if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
-                desktop.MainWindow?.StorageProvider is not { } provider)
-                throw new NullReferenceException("Missing StorageProvider instance.");
+            var files = await FileSelectorUtility.SelectFiles();
 
-            var files = await provider.OpenFilePickerAsync(new FilePickerOpenOptions()
-            {
-                Title = "Open Text File",
-                AllowMultiple = true,
-                FileTypeFilter = new[] { FilePickerFileTypes.Pdf }
-            });
+            if (files is null)
+                return;
 
             foreach (var file in files)
                 SourceFilePaths.Add(new(file.Path.LocalPath));
@@ -86,68 +81,68 @@ namespace Star_PDF_Solution_X.ViewModels
             }
         }
 
-        //private async void SplitFile(IEnumerable<string>? sourceFiles)
-        //{
-        //    try
-        //    {
-        //        double completeFileCount = 0;
-        //        OutputFiles.Clear();
+        private async void SplitFile()
+        {
+            try
+            {
+                var sourceFiles = SourceFilePaths;
+                double completeFileCount = 0;
+                OutputFiles.Clear();
 
-        //        if (sourceFiles is not null)
-        //        {
-        //            SourceFilePaths.Clear();
-        //            foreach (var sourceFile in sourceFiles)
-        //            {
-        //                if (File.Exists(sourceFile))
-        //                    SourceFilePaths.Add(sourceFile);
-        //            }
-        //        }
-        //        if (SourceFilePaths.Count == 0)
-        //        {
-        //            SelectFiles();
-        //            if (SourceFilePaths.Count() == 0)
-        //                return;
-        //        }
+                if (SourceFilePaths.Count == 0)
+                {
+                    SourceFilePaths.Clear();
+                    var files = await FileSelectorUtility.SelectFiles();
 
-        //        if (SourceFilePaths.Count() > 1)
-        //        {
-        //            MultiFileProgress = 0;
-        //        }
+                    if (files is null)
+                        return;
 
-        //        foreach (var sourceFile in SourceFilePaths)
-        //        {
-        //            SelectedSourceFilePath = sourceFile;
-        //            var outputfiles = await _pdfEditorService.SplitAsync(sourceFile, options: Options.GetPDFOptions(), progress: _progressUpdater);
+                    foreach (var file in files)
+                        SourceFilePaths.Add(new(file.Path.LocalPath));
 
-        //            if (Options.OpenDestinationDirectory)
-        //                Process.Start(new ProcessStartInfo(Path.GetDirectoryName(outputfiles.First().FilePath)) { UseShellExecute = true });
-        //            if (Options.DeleteSourceFile)
-        //                File.Delete(sourceFile);
+                    if (SourceFilePaths.Count == 0)
+                        return;
+                }
 
-        //            completeFileCount++;
-        //            if (MultiFileProgress is not null)
-        //                MultiFileProgress = completeFileCount / (double)SourceFilePaths.Count;
-        //        }
+                if (SourceFilePaths.Count() > 1)
+                {
+                    MultiFileProgress = 0;
+                }
 
-        //        if (Options.OpenDestinationDirectory && OutputFiles.Count > 0)
-        //            Process.Start(new ProcessStartInfo(Path.GetDirectoryName(OutputFiles.First().FilePath)) { UseShellExecute = true });
+                foreach (var sourceFile in SourceFilePaths)
+                {
+                    SelectedSourceFilePath = sourceFile;
+                    var outputfiles = await _pdfEditorService.SplitAsync(sourceFile, options: Options.GetPDFOptions(), progress: _progressUpdater);
 
-        //        Progress = null;
-        //        MultiFileProgress = null;
-        //    }
-        //    catch (Exception ex) { }
-        //}
+                    if (Options.OpenDestinationDirectory)
+                        Process.Start(new ProcessStartInfo(Path.GetDirectoryName(outputfiles.First().FilePath)) { UseShellExecute = true });
+                    if (Options.DeleteSourceFile)
+                        File.Delete(sourceFile);
 
-        //private ICommand? _splitFileCommand;
-        //public ICommand SplitFileCommand
-        //{
-        //    get
-        //    {
-        //        if (_splitFileCommand == null)
-        //            _splitFileCommand = new RelayCommand(SplitFile((IEnumerable<string>)));
-        //        return _splitFileCommand;
-        //    }
-        //}
+                    completeFileCount++;
+                    if (MultiFileProgress is not null)
+                        MultiFileProgress = completeFileCount / (double)SourceFilePaths.Count;
+                }
+
+                if (Options.OpenDestinationDirectory && OutputFiles.Count > 0)
+                    Process.Start(new ProcessStartInfo(Path.GetDirectoryName(OutputFiles.First().FilePath)) { UseShellExecute = true });
+
+                Progress = null;
+                MultiFileProgress = null;
+            }
+            catch (Exception ex) { }
+        }
+
+        private ICommand? _splitFileCommand;
+        public ICommand SplitFileCommand
+        {
+            get
+            {
+                if (_splitFileCommand == null)
+                    _splitFileCommand = new RelayCommand(SplitFile);
+                return _splitFileCommand;
+            }
+        }
 
         public SplitFileViewModel(IPDFEditorService pdfEditorService)
         {

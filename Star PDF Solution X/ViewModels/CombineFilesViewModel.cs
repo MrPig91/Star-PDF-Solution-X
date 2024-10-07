@@ -15,6 +15,7 @@ using Avalonia.Platform.Storage;
 using Avalonia;
 using ReactiveUI;
 using Avalonia.Threading;
+using Star_PDF_Solution_X.Utilities;
 
 namespace Star_PDF_Solution_X.ViewModels
 {
@@ -53,15 +54,10 @@ namespace Star_PDF_Solution_X.ViewModels
         private async void SelectFiles()
         {
             SourceFiles.Clear();
-            if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
-                desktop.MainWindow?.StorageProvider is not { } provider)
-                throw new NullReferenceException("Missing StorageProvider instance.");
-            var files = await provider.OpenFilePickerAsync(new FilePickerOpenOptions()
-            {
-                Title = "Open Text File",
-                AllowMultiple = true,
-                FileTypeFilter = new[] { FilePickerFileTypes.Pdf }
-            });
+            var files = await FileSelectorUtility.SelectFiles();
+
+            if (files is null)
+                return;
 
             foreach (var file in files)
                 SourceFiles.Add(new(file.Path.LocalPath));
@@ -82,7 +78,15 @@ namespace Star_PDF_Solution_X.ViewModels
             {
                 if (SourceFiles.Count == 0)
                 {
-                    SelectFiles();
+                    SourceFiles.Clear();
+                    var files = await FileSelectorUtility.SelectFiles();
+
+                    if (files is null)
+                        return;
+
+                    foreach (var file in files)
+                        SourceFiles.Add(new(file.Path.LocalPath));
+
                     if (SourceFiles.Count == 0)
                         return;
                 }

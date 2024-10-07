@@ -107,7 +107,7 @@
     </Expander>
 
     <Button Padding="5" Margin="5 0 5 5" Grid.Row="4" Theme="{StaticResource GeneralButton}"
-         >
+         Command="{Binding SplitFileCommand}">
       <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
         <Image Height="25" Margin="0 0 10 0"/>
         <TextBlock Text="Split" VerticalAlignment="Center" FontSize="17"/>
