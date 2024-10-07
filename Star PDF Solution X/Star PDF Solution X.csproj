@@ -25,6 +25,8 @@
     <None Remove="Assets\remove.png" />
     <None Remove="Assets\sort.png" />
     <None Remove="Assets\split.png" />
+    <None Remove="Assets\starPDF.ico" />
+    <None Remove="Assets\starPDF.png" />
     <None Remove="Assets\up.png" />
   </ItemGroup>
 
@@ -69,6 +71,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AvaloniaResource>
     <AvaloniaResource Update="Assets\split.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Update="Assets\starPDF.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Update="Assets\starPDF.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AvaloniaResource>
     <AvaloniaResource Update="Assets\up.png">
