@@ -123,6 +123,8 @@ namespace Star_PDF_Solution_X.ViewModels
                 if (oldIndex == 0)
                     return;
                 SourceFiles.Move(oldIndex, newIndex);
+
+                SelectedSourceFile = SourceFiles[newIndex];
             }
             catch (Exception ex) { }
         }
@@ -149,6 +151,7 @@ namespace Star_PDF_Solution_X.ViewModels
                 if (oldIndex == SourceFiles.Count - 1)
                     return;
                 SourceFiles.Move(oldIndex, newIndex);
+                SelectedSourceFile = SourceFiles[newIndex];
             }
             catch (Exception ex) { }
         }
@@ -187,8 +190,12 @@ namespace Star_PDF_Solution_X.ViewModels
             {
                 if (SelectedSourceFile is null)
                     return;
+                var index = SourceFiles.IndexOf(SelectedSourceFile);
                 if (SourceFiles.Contains(SelectedSourceFile))
                     SourceFiles.Remove(SelectedSourceFile);
+
+                index = index == 0 ? 0 : index - 1;
+                SelectedSourceFile = SourceFiles[index];
             }
             catch (Exception ex) {  }
         }
