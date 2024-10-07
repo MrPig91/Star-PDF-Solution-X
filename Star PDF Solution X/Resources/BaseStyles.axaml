@@ -7,14 +7,19 @@
   </Design.PreviewWith>
 
   <!-- Add Styles Here -->
-  <!--<Style Selector="CheckBox">
-    <Setter Property="Foreground" Value="WhiteSmoke" />
+  <Style Selector="ListBox">
+    <Setter Property="Background" Value="#050a0d" />
+    <Setter Property="BorderBrush" Value="#abadb3" />
+    <Setter Property="BorderThickness" Value="1" />
+  </Style>
 
-    <Style Selector="^:unchecked /template/ Border#NormalRectangle">
-      <Setter Property="BorderBrush" Value="Red"/>
+  <Style Selector="Expander ToggleButton">
+    <Setter Property="Background" Value="#0b1b27" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="FontSize" Value="15" />
+    <Style Selector="^:pointerover /template/ Border#ToggleButtonBackground">
+      <Setter Property="Background" Value="#071119" />
     </Style>
-    <Style Selector="^:checked /template/ Border#NormalRectangle">
-      <Setter Property="BorderBrush" Value="Transparent"/>
-    </Style>
-  </Style>-->
+  </Style>
+  
 </Styles>

@@ -76,15 +76,16 @@
       </ListBox.ItemTemplate>
     </ListBox>
 
-    <Expander Grid.Row="2" IsExpanded="False" Margin="5 0 5 5"
-              Header="Options" HorizontalAlignment="Stretch">
+    <Expander Grid.Row="2" IsExpanded="True" Margin="5 0 5 5"
+              Header="Options"
+              HorizontalAlignment="Stretch">
       <Grid>
         <Grid.RowDefinitions>
-          <RowDefinition Height="5"/>
+          <RowDefinition Height="0"/>
           <RowDefinition />
           <RowDefinition Height="auto" />
           <RowDefinition />
-          <RowDefinition Height="5"/>
+          <RowDefinition Height="0"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="5"/>
