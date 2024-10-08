@@ -21,6 +21,7 @@ public partial class CombineFilesView : UserControl
         addFilesBorder.AddHandler(DragDrop.DragEnterEvent, dragDropBorder_DragEnter);
         addFilesBorder.AddHandler(DragDrop.DragLeaveEvent, dragDropBorder_DragLeave);
 
+        combineFilesBorder.AddHandler(DragDrop.DropEvent, combineFilesBorder_Drop);
         addFilesBorder.AddHandler(DragDrop.DropEvent, addFilesBorder_Drop);
     }
 
@@ -81,6 +82,37 @@ public partial class CombineFilesView : UserControl
                 }
             }
 
+            dragDropGrid.IsVisible = false;
+        }
+        catch (Exception ex) { }
+    }
+
+    private void combineFilesBorder_Drop(object? sender, DragEventArgs e)
+    {
+        try
+        {
+            var files = e.Data.GetFiles();
+
+            if (files?.Count() > 0)
+            {
+                var viewModel = this.DataContext as CombineFilesViewModel;
+                if (viewModel is null)
+                    return;
+                string fileName = string.Empty;
+                List<string> pdfsToCombine = new();
+                files.Where(f => f.Path.LocalPath.EndsWith(".pdf")).ToList().ForEach(f => pdfsToCombine.Add(f.Path.LocalPath));
+                if (pdfsToCombine.Count > 0)
+                {
+                    viewModel.SourceFiles.Clear();
+                    foreach (var file in pdfsToCombine)
+                    {
+                        viewModel.SourceFiles.Add(new(file));
+                    }
+                    viewModel.SelectedSourceFile = viewModel.SourceFiles.FirstOrDefault();
+                    viewModel.NaturalSortCommand.Execute(null);
+                    viewModel.CombineFilesCommand.Execute(null);
+                }
+            }
             dragDropGrid.IsVisible = false;
         }
         catch (Exception ex) { }
