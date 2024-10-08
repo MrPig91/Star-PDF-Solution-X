@@ -13,6 +13,7 @@ namespace Star_PDF_Solution_X.ViewModels
 {
     public class CombineFilesViewModel : ViewModelBase
     {
+        public event EventHandler<string> ErrorAdded;
         private IPDFEditorService _pdfEditorService;
         private Progress<double> _progressUpdater = new();
 
@@ -39,20 +40,28 @@ namespace Star_PDF_Solution_X.ViewModels
             get { return _progress; }
             set { _progress = value; OnPropertyChanged(); }
         }
-
+        public List<string> Errors { get; } = new();
 
         public CombineFilesOptionsViewModel Options { get; } = new();
-
+        public void AddError(string error)
+        {
+            Errors.Add(error);
+            ErrorAdded?.Invoke(this, error);
+        }
         private async void SelectFiles()
         {
-            SourceFiles.Clear();
-            var files = await FileSelectorUtility.SelectFiles();
+            try
+            {
+                SourceFiles.Clear();
+                var files = await FileSelectorUtility.SelectFiles();
 
-            if (files is null)
-                return;
+                if (files is null)
+                    return;
 
-            foreach (var file in files)
-                SourceFiles.Add(new(file.Path.LocalPath));
+                foreach (var file in files)
+                    SourceFiles.Add(new(file.Path.LocalPath));
+            }
+            catch (Exception ex) { AddError(ex.Message); }
         }
         private ICommand? _selectFilesCommand;
         public ICommand SelectFilesCommand
@@ -98,7 +107,7 @@ namespace Star_PDF_Solution_X.ViewModels
                 }
                 Progress = null;
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { AddError(ex.Message); }
         }
 
         private ICommand _combineFilesCommand;
@@ -126,7 +135,7 @@ namespace Star_PDF_Solution_X.ViewModels
 
                 SelectedSourceFile = SourceFiles[newIndex];
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { AddError(ex.Message); }
         }
         private ICommand _moveUpCommand;
 
@@ -153,7 +162,7 @@ namespace Star_PDF_Solution_X.ViewModels
                 SourceFiles.Move(oldIndex, newIndex);
                 SelectedSourceFile = SourceFiles[newIndex];
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { AddError(ex.Message); }
         }
         private ICommand _moveDownCommand;
 
@@ -172,7 +181,7 @@ namespace Star_PDF_Solution_X.ViewModels
             {
                 SourceFiles.Sort();
             }
-            catch (Exception ex) {  }
+            catch (Exception ex) { AddError(ex.Message); }
         }
         private ICommand _naturalSortCommand;
         public ICommand NaturalSortCommand
@@ -197,7 +206,7 @@ namespace Star_PDF_Solution_X.ViewModels
                 index = index == 0 ? 0 : index - 1;
                 SelectedSourceFile = SourceFiles[index];
             }
-            catch (Exception ex) {  }
+            catch (Exception ex) { AddError(ex.Message); }
         }
         private ICommand _removeCommand;
         public ICommand RemoveCommand
@@ -215,7 +224,7 @@ namespace Star_PDF_Solution_X.ViewModels
             {
                 SourceFiles.Clear();
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { AddError(ex.Message); }
         }
         private ICommand _clearCommand;
         public ICommand ClearCommand
@@ -236,7 +245,7 @@ namespace Star_PDF_Solution_X.ViewModels
                     return;
                 Process.Start(new ProcessStartInfo(OutputFile.FilePath) { UseShellExecute = true });
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { AddError(ex.Message); }
         }
         private ICommand _openFileCommand;
         public ICommand OpenFileCommand

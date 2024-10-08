@@ -19,6 +19,7 @@ namespace Star_PDF_Solution_X.ViewModels
 {
     public class SplitFileViewModel : ViewModelBase
     {
+        public event EventHandler<string> ErrorAdded;
         private IPDFEditorService _pdfEditorService;
         private Progress<Tuple<StarPDFDocument, double>> _progressUpdater = new();
         public ObservableCollection<string> SourceFilePaths { get; } = new();
@@ -29,6 +30,7 @@ namespace Star_PDF_Solution_X.ViewModels
             set { _selectedSourceFilePath = value; OnPropertyChanged(); }
         }
         public ObservableCollection<StarPDFDocumentViewModel> OutputFiles { get; } = new();
+        public List<string> Errors { get; } = new();
         public SplitFileOptionsViewModel Options { get; } = new();
         private double? _progress;
 
@@ -42,6 +44,11 @@ namespace Star_PDF_Solution_X.ViewModels
         {
             get => _multiFileProgress;
             set { _multiFileProgress = value; OnPropertyChanged(); }
+        }
+        public void AddError(string error)
+        {
+            Errors.Add(error);
+            ErrorAdded?.Invoke(this, error);
         }
         private void Clear()
         {
@@ -61,14 +68,18 @@ namespace Star_PDF_Solution_X.ViewModels
 
         private async void SelectFiles()
         {
-            SourceFilePaths.Clear();
-            var files = await FileSelectorUtility.SelectFiles();
+            try
+            {
+                SourceFilePaths.Clear();
+                var files = await FileSelectorUtility.SelectFiles();
 
-            if (files is null)
-                return;
+                if (files is null)
+                    return;
 
-            foreach (var file in files)
-                SourceFilePaths.Add(new(file.Path.LocalPath));
+                foreach (var file in files)
+                    SourceFilePaths.Add(new(file.Path.LocalPath));
+            }
+            catch (Exception ex) { AddError(ex.Message); }
         }
         private ICommand? _selectFilesCommand;
         public ICommand SelectFilesCommand
@@ -130,7 +141,7 @@ namespace Star_PDF_Solution_X.ViewModels
                 Progress = null;
                 MultiFileProgress = null;
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { AddError(ex.Message); }
         }
 
         private ICommand? _splitFileCommand;

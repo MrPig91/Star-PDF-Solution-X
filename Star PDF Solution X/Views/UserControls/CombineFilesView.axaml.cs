@@ -82,9 +82,14 @@ public partial class CombineFilesView : UserControl
                 }
             }
 
-            dragDropGrid.IsVisible = false;
         }
-        catch (Exception ex) { }
+        catch (Exception ex)
+        {
+            if (DataContext is not null && DataContext is CombineFilesViewModel)
+                ((CombineFilesViewModel)DataContext).AddError(ex.Message);
+        }
+
+        dragDropGrid.IsVisible = false;
     }
 
     private void combineFilesBorder_Drop(object? sender, DragEventArgs e)
@@ -113,8 +118,12 @@ public partial class CombineFilesView : UserControl
                     viewModel.CombineFilesCommand.Execute(null);
                 }
             }
-            dragDropGrid.IsVisible = false;
         }
-        catch (Exception ex) { }
+        catch (Exception ex)
+        {
+            if (DataContext is not null && DataContext is CombineFilesViewModel)
+                ((CombineFilesViewModel)DataContext).AddError(ex.Message);
+        }
+        dragDropGrid.IsVisible = false;
     }
 }

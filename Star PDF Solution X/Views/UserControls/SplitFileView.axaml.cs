@@ -42,7 +42,11 @@ public partial class SplitFileView : UserControl
                 }
             }
         }
-        catch (Exception ex) { }
+        catch (Exception ex) 
+        {
+            if (DataContext is not null && DataContext is SplitFileViewModel)
+                ((SplitFileViewModel)DataContext).AddError(ex.Message);
+        }
 
         dragDropBorder.IsVisible = false;
     }
