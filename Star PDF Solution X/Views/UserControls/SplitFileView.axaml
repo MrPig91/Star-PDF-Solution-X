@@ -28,7 +28,7 @@
       </Border.Background>
       <Grid>
         <TextBlock Text="Split File(s)" HorizontalAlignment="Center" VerticalAlignment="Center"
-               FontSize="35" FontWeight="SemiBold" Foreground="{StaticResource SecondaryForegroundBrush}"/>
+               FontSize="35" FontWeight="SemiBold" IsHitTestVisible="False"/>
       </Grid>
     </Border>
 
