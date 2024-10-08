@@ -1,7 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Star_PDF_Solution_X.ViewModels;
 
 namespace Star_PDF_Solution_X;
 
@@ -16,6 +20,8 @@ public partial class CombineFilesView : UserControl
         combineFilesBorder.AddHandler(DragDrop.DragLeaveEvent, dragDropBorder_DragLeave);
         addFilesBorder.AddHandler(DragDrop.DragEnterEvent, dragDropBorder_DragEnter);
         addFilesBorder.AddHandler(DragDrop.DragLeaveEvent, dragDropBorder_DragLeave);
+
+        addFilesBorder.AddHandler(DragDrop.DropEvent, addFilesBorder_Drop);
     }
 
     private void Grid_DragEnter(object? sender, DragEventArgs e)
@@ -48,5 +54,35 @@ public partial class CombineFilesView : UserControl
         dragDropGrid.IsVisible = false;
         addFilesBorder.IsVisible = false;
         combineFilesBorder.IsVisible = false;
+    }
+
+    private void addFilesBorder_Drop(object? sender, DragEventArgs e)
+    {
+        try
+        {
+            var files = e.Data.GetFiles();
+
+            if (files?.Count() > 0)
+            {
+                var viewModel = this.DataContext as CombineFilesViewModel;
+                if (viewModel is null)
+                    return;
+                string fileName = string.Empty;
+                List<string> pdfsToAdd = new();
+                files.Where(f => f.Path.LocalPath.EndsWith(".pdf")).ToList().ForEach(f => pdfsToAdd.Add(f.Path.LocalPath));
+
+                if (pdfsToAdd.Count > 0)
+                {
+                    foreach (var file in pdfsToAdd)
+                    {
+                        viewModel.SourceFiles.Add(new(file));
+                    }
+                    viewModel.SelectedSourceFile = viewModel.SourceFiles.FirstOrDefault();
+                }
+            }
+
+            dragDropGrid.IsVisible = false;
+        }
+        catch (Exception ex) { }
     }
 }
