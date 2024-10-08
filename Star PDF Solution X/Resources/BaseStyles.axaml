@@ -21,5 +21,27 @@
       <Setter Property="Background" Value="#071119" />
     </Style>
   </Style>
+
+  <Style Selector="Border.DragDrop">
+    <Setter Property="BorderBrush" Value="#4c4c4c" />
+    <Setter Property="BorderThickness" Value="5" />
+    <Setter Property="CornerRadius" Value="5" />
+    <Setter Property="DragDrop.AllowDrop" Value="True" />
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="ZIndex" Value="2" />
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+  <Style Selector="Border.DragEnter">
+    <Style.Animations>
+      <Animation Duration="0:0:.25" FillMode="Forward">
+        <KeyFrame Cue="0%">
+          <Setter Property="BorderBrush" Value="#4c4c4c" />
+        </KeyFrame>
+        <KeyFrame Cue="100%">
+          <Setter Property="BorderBrush" Value="#CCCCCC" />
+        </KeyFrame>
+      </Animation>
+    </Style.Animations>
+  </Style>
   
 </Styles>

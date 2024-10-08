@@ -9,7 +9,8 @@
   <Design.DataContext>
     <vm:SplitFileViewModel />
   </Design.DataContext>
-  <Grid Theme="{StaticResource WindowGrid}">
+  <Grid Theme="{StaticResource WindowGrid}"
+        DragDrop.AllowDrop="True">
     <Grid.RowDefinitions>
       <RowDefinition Height="auto" />
       <RowDefinition Height="auto" />
@@ -19,6 +20,17 @@
       <RowDefinition Height="auto" />
       <RowDefinition Height="auto" />
     </Grid.RowDefinitions>
+
+    <Border x:Name="dragDropBorder" Classes="DragDrop" Grid.RowSpan="5"
+            >
+      <Border.Background>
+        <SolidColorBrush Color="{StaticResource SecondaryDarkColor}" Opacity=".75" />
+      </Border.Background>
+      <Grid>
+        <TextBlock Text="Split File(s)" HorizontalAlignment="Center" VerticalAlignment="Center"
+               FontSize="35" FontWeight="SemiBold" Foreground="{StaticResource SecondaryForegroundBrush}"/>
+      </Grid>
+    </Border>
 
     <Grid>
       <Grid.ColumnDefinitions>
