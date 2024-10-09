@@ -1,12 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <AssemblyName>StarPDFSolutionX</AssemblyName>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <!--<RuntimeIdentifier>linux-x64</RuntimeIdentifier>-->
+    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+    <PublishTrimmed>True</PublishTrimmed>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <ApplicationIcon>starPDF.ico</ApplicationIcon>
+    <PackageId>StarPDFSolutionX</PackageId>
+    <Title>Star PDF Solution X</Title>
+    <Company>SysDeskDev</Company>
+    <Authors>Syrius Cleveland</Authors>
+    <Description>A cross platform PDF tool for merging and splitting PDF files.</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -86,5 +94,9 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Resources\BaseStyles.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="starPDF.ico" />
   </ItemGroup>
 </Project>
