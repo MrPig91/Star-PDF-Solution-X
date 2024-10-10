@@ -13,6 +13,6 @@ If you do plan to install the windows version I recomment installing [Star PDF S
 
 ## How to use
 
-![Link to original github repo ReadMe](https://github.com/MrPig91/StarPDFSolution)
+[Link to WPF version of Star PDF Solution ReadMe](https://github.com/MrPig91/StarPDFSolution)
 
 Same instructions as the original application minus the ablity to use context menu options in Windows file explorer. Also the drag and drop feature does not work on Linux.
