@@ -4,7 +4,9 @@ A cross platform version of my WPF application Star PDF Solution. Most feature w
 
 ## Download & Install
 
-Packages will be uploaded soon
+Installers are provided for both Windows and Linux.
+
+![Click here to download version 1.0.0](https://github.com/MrPig91/Star-PDF-Solution-X/releases/tag/v1.0.0)
 
 ## How to use
 
