@@ -8,6 +8,9 @@ Installers are provided for both Windows and Linux.
 
 ![Click here to download version 1.0.0](https://github.com/MrPig91/Star-PDF-Solution-X/releases/tag/v1.0.0)
 
+If you do plan to install the windows version I recomment installing ![Star PDF Solution instead](https://payhip.com/b/YNz2K) instead, which is written in WPF and includes window explorer context menu shortcuts.
+
+
 ## How to use
 
 ![Link to original github repo ReadMe](https://github.com/MrPig91/StarPDFSolution)
